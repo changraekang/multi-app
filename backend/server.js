@@ -19,8 +19,8 @@ db.pool.query(`CREATE TABLE lists (
     id INTEGER PRIMARY KEY,
     value TEXT,
     )`, (err, results,fields) => {
-        console.log('results', results);
-    });
+        console.log('results', results)
+    })
 
 
 // DB lists 테이블에 있는 data 서버로 보내주기
@@ -29,12 +29,14 @@ app.get('/api/valuses', function( req,res) {
     db.pool.query(`SELECT * FROM lists;`,
     (err,results,fields) =>{
         if(err)
-        return res.status(500).send(err)
+            return res.status(500).send(err)
         else
-        return res.json(results)
+            return res.json(results)
 
     })
-});
+})
+
+
 
 
 // Client에서 입력한 data를 DB에 넣기
@@ -46,10 +48,13 @@ app.post('/api/value', function(req,res,next){
         return res.status(500).send(err)
         else
         return res.json({ success: true, value: req.body.value})
+    })
+    
+})
 
-});
 
 
 app.listen(port , () => {
     console.log(`Express server listening on ${port}`);
-});
+})
+
